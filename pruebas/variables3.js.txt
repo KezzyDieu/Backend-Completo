@@ -1,0 +1,5 @@
+var b=200;
+var c=300;
+
+module.exports.b=b;
+module.exports.c=c;

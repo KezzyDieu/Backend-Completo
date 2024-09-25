@@ -1,0 +1,43 @@
+//Funcion normal con variable
+function saludar(nombre){
+return "Hola "+nombre;
+}
+console.log(saludar("Felipe"));
+
+//Funcion de flecha
+var saludo=()=>{
+    console.log("Hola con una arrow function");
+}
+saludo();
+
+//Funcion de flecha con variable
+var saludo2=nombre=>"Hola "+nombre+" con una arrow function";
+console.log(saludo2("Felipe"));
+
+//Funcion de flecha con mas de un parametro
+var saludo3=(nombre1, nombre2)=>"Hola "+nombre1+" y "+nombre2+ " con una arrow function";
+console.log(saludo3("Felipe", "Maria"));
+
+//Funcion anonima
+var saludo4=function(nombre){
+    return "Hola "+nombre;
+}
+console.log(saludo4("Felipe"));
+
+//Funcion anonima sin undefinde
+var saludo5=function(nombre="anónimo"){
+    return "Hola "+nombre;
+}
+console.log(saludo5(/*"Felipe"*/));
+
+var saludo6=()=>{
+console.log("Saludo 6");
+}
+
+//LLamar una funcion dentro de otra
+var saludo7=(nombre, saludo6)=>{
+console.log("Saludo 7 "+nombre);
+saludo6();
+}
+
+saludo7("Thomas", saludo6);
