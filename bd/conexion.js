@@ -18,10 +18,14 @@ const usuariosBD = bd.collection("miejemploBD");
 // Llamamos a la colección "productos" en Firestore, donde se almacenan los datos de productos
 const productosBD = bd.collection("productos");
 
+// Llamamos a la colección "ventas" en Firestore, donde se almacenan los datos de las ventas generadas
+const ventasBD = bd.collection("ventas");
+
 // Exportamos las colecciones para que puedan ser utilizadas en otros módulos del proyecto
 module.exports = {
     usuariosBD,
     productosBD,
+    ventasBD,
 }
 
 // console.log(usuariosBD); 
