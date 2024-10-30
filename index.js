@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const usuariosRutas = require("./rutas/rutasUsuarios");
 const productosRutas = require("./rutas/rutasProductos");
 const ventasRutas = require("./rutas/rutasVentas");
@@ -10,6 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Aceptar datos en formato JSON
 app.use(express.json());
+app.use(cors());
 
 app.use("/", usuariosRutas);
 app.use("/", productosRutas);

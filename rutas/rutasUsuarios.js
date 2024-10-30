@@ -1,5 +1,5 @@
 var rutas = require("express").Router();
-var {mostrarUsuarios, nuevoUsuario, borrarUsuarios, buscarPorId} = require("../bd/usuariosBD");
+var {mostrarUsuarios, nuevoUsuario, borrarUsuarios, buscarPorId, modificarUsuario} = require("../bd/usuariosBD");
 //var {Router} = require("express");
 
 rutas.get("/", async (req, res)=>{
@@ -25,5 +25,20 @@ rutas.delete("/borrarUsuario/:id", async (req, res)=>{
     var usuarioBorrado = await borrarUsuarios(req.params.id);
     res.json(usuarioBorrado);
 });
+
+rutas.put("/modificarUsuario/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const nuevosDatos = req.body;
+        
+        // Llama a la función modificarUsuario con el ID y los nuevos datos.
+        const resultado = await modificarUsuario(id, nuevosDatos);
+        console.log("Edición realizada correctamente");
+        res.json(resultado);
+    } catch (error) {
+        res.status(400).json({ mensaje: error.message });
+    }
+});
+
 
 module.exports = rutas;

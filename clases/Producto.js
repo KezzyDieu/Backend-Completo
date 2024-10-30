@@ -82,15 +82,3 @@ class Producto {
 // Exporta la clase Producto para poder ser utilizada en otros módulos
 module.exports = Producto;
 
-/* 
-// Ejemplo de cómo crear una nueva instancia de Producto
-data = {
-    id: "fjkd",
-    nombre: "Felipe Estrella",
-    cantidad: 15,
-    precio: "abc",
-}
-
-const producto1 = new Producto(data);
-console.log(producto1); 
-*/

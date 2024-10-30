@@ -92,21 +92,25 @@ async function borrarProductos(id) {
     return productoBorrado;
 }
 
-module.exports ={
+// Ejemplo de función para modificar un producto
+async function modificarProducto(id, nuevosDatos) {
+    try {
+        const productoDoc = await productosBD.doc(id).get();
+        if (!productoDoc.exists) {
+            throw new Error("Producto no encontrado");
+        }
+        await productosBD.doc(id).update(nuevosDatos);
+        return { mensaje: "Producto actualizado correctamente", id };
+    } catch (error) {
+        console.error("Error al modificar producto:", error);
+        throw error;
+    }
+}
+
+module.exports = {
     mostrarProductos,
     nuevoProducto,
     borrarProductos,
     buscarPorId,
-}
-
-// Prueba con datos de ejemplo para crear un nuevo producto
-/*var data = {
-    nombre: "Arroz",
-    cantidad: "15",
-    precio: "126"
-}*/
-
-//borrarProductos("60lHh5DKcWbICJqsR7v1"); // Elimina el producto con ID "103"
-//mostrarProductos(); // Llama a la función para mostrar productos
-//buscarPorId("AA9neFFUFEDZNMPWc1mD"); // Busca al producto con ID "102"
-//nuevoProducto(data); // Crea un nuevo producto con los datos proporcionados
+    modificarProducto, 
+};

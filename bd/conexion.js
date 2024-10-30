@@ -27,5 +27,3 @@ module.exports = {
     productosBD,
     ventasBD,
 }
-
-// console.log(usuariosBD); 

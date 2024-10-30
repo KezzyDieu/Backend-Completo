@@ -1,6 +1,7 @@
 
 const rutas = require("express").Router();
-const { nuevaVenta, buscarVentaPorId, cancelarVenta, mostrarVentas } = require("../bd/ventasBD");
+const { nuevaVenta, mostrarVentas, buscarVentaPorId, cancelarVenta, modificarVenta } = require("../bd/ventasBD");
+
 
 // Ruta para mostrar todas las ventas
 rutas.get("/ventas", async (req, res) => {
@@ -47,6 +48,19 @@ rutas.patch("/ventas/cancelarVenta/:ventaId", async (req, res) => {
         res.status(500).json({ success: false, message: "Error al cancelar la venta" });
     }
 });
+
+rutas.put("/ventas/modificarVenta/:ventaId", async (req, res) => {
+    try {
+        const ventaId = req.params.ventaId;
+        const nuevosDatos = req.body;
+        const resultado = await modificarVenta(ventaId, nuevosDatos);
+        res.json(resultado);
+    } catch (error) {
+        console.error(`Error al modificar la venta con ID ${req.params.ventaId}:`, error);
+        res.status(500).json({ success: false, message: "Error al modificar la venta" });
+    }
+});
+
 
 module.exports = rutas;
 

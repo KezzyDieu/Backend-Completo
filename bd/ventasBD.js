@@ -10,7 +10,7 @@ async function nuevaVenta(data) {
     for (let i = 0; i < data.productos.length; i += 2) {
         productos.push({
             id: data.productos[i],
-            cantidad: parseInt(data.productos[i + 1])  // Convertir la cantidad a número
+            cantidad: parseInt(data.productos[i + 1])
         });
     }
 
@@ -45,14 +45,14 @@ async function nuevaVenta(data) {
         usuarioId: data.usuarioId,
         productos: productos,
         total: total,
-        estatus: "vendido",  // Estatus inicial de la venta
+        estatus: "vendido",
         fecha: new Date()
     };
 
     console.log("Guardando la venta en Firebase...");
     try {
-        const nuevaVentaRef = await ventasBD.doc();  // Generar ID de la venta
-        await nuevaVentaRef.set(venta);  // Guardar la venta
+        const nuevaVentaRef = await ventasBD.doc();
+        await nuevaVentaRef.set(venta);
         console.log("Venta registrada exitosamente");
         return { success: true, message: "Venta registrada exitosamente", ventaId: nuevaVentaRef.id };
     } catch (error) {
@@ -60,6 +60,8 @@ async function nuevaVenta(data) {
         return { success: false, message: "Error al registrar la venta" };
     }
 }
+
+
 
 
 async function buscarVentaPorId(ventaId) {
@@ -123,9 +125,30 @@ productosBD.get()
   });
 
 
+  async function modificarVenta(ventaId, nuevosDatos) {
+    console.log(`Modificando la venta con ID: ${ventaId}`);
+
+    try {
+        const ventaDoc = await ventasBD.doc(ventaId).get();
+        if (!ventaDoc.exists) {
+            return { success: false, message: `La venta con ID ${ventaId} no existe` };
+        }
+
+        // Actualizar la venta con los nuevos datos
+        await ventasBD.doc(ventaId).update(nuevosDatos);
+        console.log(`Venta con ID ${ventaId} modificada exitosamente`);
+        return { success: true, message: `Venta con ID ${ventaId} modificada exitosamente` };
+    } catch (error) {
+        console.error(`Error al modificar la venta con ID ${ventaId}:`, error);
+        return { success: false, message: `Error al modificar la venta con ID ${ventaId}` };
+    }
+}
+
 module.exports = {
     nuevaVenta,
     mostrarVentas,
     buscarVentaPorId,
     cancelarVenta,
+    modificarVenta, 
 };
+
